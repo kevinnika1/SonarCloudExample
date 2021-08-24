@@ -70,7 +70,7 @@ jobs:
           output: trivy-results.txt
 
       - name: check trivy results file
-        runs: |
+        run: |
           cat trivy-results.txt
 
       - name: Upload trviy results
@@ -79,14 +79,14 @@ jobs:
           name: homework
           path: trivy-results.txt
 
-    PushtoECR:
+   PushtoECR:
       runs-on: ubuntu-latest
       needs: [ContainerVM]
       steps:
         - name: push to ecr
           run: echo "pushing to ecr"
 
-    CheckECR:
+   CheckECR:
       runs-on: ubuntu-18.04
       needs: [PushtoECR]
       steps:
@@ -107,7 +107,7 @@ jobs:
         - name: Check exr result file
           run: cat trivyecr-results.txt
 
-    DeployToEKS:
+   DeployToEKS:
       runs-on: ubuntu-latest
       needs: [CheckECR]
       steps:
