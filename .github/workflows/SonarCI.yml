@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-   SCA(config):
+   SCA:
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout repo
@@ -27,7 +27,7 @@ jobs:
           soft_fail: true
           output_format: json
 
-   SCA/SAST(app):
+   SAST:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -49,7 +49,7 @@ jobs:
   
    ContainerVM:
     runs-on: ubuntu-latest
-    needs: [SCA(config),SCA/SAST(app)]
+    needs: [SCA,SAST]
     steps: 
       - name:  Checkout repo
         uses: actions/checkout@master
