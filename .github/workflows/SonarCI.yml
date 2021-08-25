@@ -41,6 +41,7 @@ jobs:
         args: >
           -Dsonar.organization=kevinnika1
           -Dsonar.projectKey=kevinnika1_SonarCloudExample
+          -Dsonar.verbose=true
 
     - name: link to the project in sonar
       run: echo  "visit this link to see results of scan https://sonarcloud.io/dashboard?id=kevinnika1_SonarCloudExample"
