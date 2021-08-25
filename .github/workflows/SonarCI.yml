@@ -25,7 +25,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           soft_fail: true
-          output_format: json
+          output_format: cli
 
    SAST:
     runs-on: ubuntu-latest
@@ -76,7 +76,7 @@ jobs:
       - name: Upload trviy results
         uses: actions/upload-artifact@v2
         with:
-          name: homework
+          name: Conatiner VM results
           path: trivy-results.txt
 
    PushtoECR:
