@@ -45,6 +45,13 @@ jobs:
 
     - name: link to the project in sonar
       run: echo  "visit this link to see results of scan https://sonarcloud.io/dashboard?id=kevinnika1_SonarCloudExample"
+      
+    - name: SonarQube Quality Gate check
+      uses: sonarsource/sonarqube-quality-gate-action@master
+      # Force to fail step after specific time
+      timeout-minutes: 5
+      env:
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   
    ContainerVM:
