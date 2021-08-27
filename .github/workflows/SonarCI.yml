@@ -55,14 +55,14 @@ jobs:
        
     - name: Get Sonar Issues
       run: |
-        sudo apt install python3.8
         python sonar-apis.py
+        ls
         
     - name: upload sonar results to annotaions
       uses: Attest/annotations-action@v1.0.3
       with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          input: './sonarresults.json'
+          input: 'sonarresults.json'
           title: 'Annotate Files'
   
    ContainerVM:
