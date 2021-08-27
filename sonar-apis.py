@@ -11,7 +11,7 @@ result= []
 for x in issuesJSON['issues']:
     if (x['project']== project):
         thisdict= {}
-        thisdict['file']=x.get('component')
+        thisdict['file']=x['component'].replace(project+":", '')
         thisdict['title']=x.get('component')
         thisdict['message']=x.get('message')
         thisdict['annotation_level']=x.get('severity')
