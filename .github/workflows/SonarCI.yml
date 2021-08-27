@@ -52,7 +52,18 @@ jobs:
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+       
+    - name: Get Sonar Issues
+      run: |
+        sudo apt install python3.8
+        python sonar-apis.py
+        
+    - name: upload sonar results to annotaions
+      uses: Attest/annotations-action@v0.1.0
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          input: './sonarresults.json'
+          title: 'Annotate Files'
   
    ContainerVM:
     runs-on: ubuntu-latest
