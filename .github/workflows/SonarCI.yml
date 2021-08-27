@@ -62,8 +62,8 @@ jobs:
       uses: yuzutech/annotations-action@v0.3.0
       with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          title: 'Annotate Files'
-          input: 'sonarresults.json'
+          title: 'lint'
+          input: './sonarresults.json'
           
           
   
