@@ -15,7 +15,7 @@ for x in issuesJSON['issues']:
         thisdict['title']=x.get('component')
         thisdict['message']=x.get('message')
         thisdict['annotation_level']=x.get('severity')
-        thisdict['line']=x['flows']
+      #  thisdict['line']=x['flows']
        # for y in x['flows']:
        #     thisdict['line']=y['locations']#['locations']
         result.append(thisdict)
