@@ -63,7 +63,7 @@ jobs:
       with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           ignore-unauthorized-error: 'true'
-          title: 'lint'
+          title: 'Sonar Issues'
           input: './sonarresults.json'
           
           
