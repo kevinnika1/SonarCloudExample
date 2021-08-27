@@ -16,12 +16,10 @@ for x in issuesJSON['issues']:
         thisdict['message']=x.get('message')
         thisdict['annotation_level']=x.get('severity')
         for y in x['flows']:
-            thisdict['line']=y['locations'][0]['textRange']['startLine']#['locations']
-            result.append(thisdict)
-      #  thisdict['line']=x['flows']
-       # for y in x['flows']:
-       #     thisdict['line']=y['locations']#['locations']
-      #  result.append(thisdict)
+            thisdict['line']=y['locations'][0]['textRange']['startLine'], y['locations'][0]['textRange']['endLine']#['locations']
+        for z in x['flows']:
+            thisdict['raw_details']=z['locations']#['locations'] 
+        result.append(thisdict)
      
 
 with open("sonarresults.json", "w") as outfile:
