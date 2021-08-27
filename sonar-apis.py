@@ -11,14 +11,18 @@ result= []
 for x in issuesJSON['issues']:
     if (x['project']== project):
         thisdict= {}
-        thisdict['component']=x.get('component')
+        thisdict['file']=x.get('component')
+        thisdict['title']=x.get('component')
         thisdict['message']=x.get('message')
-        thisdict['severity']=x.get('severity')
+        thisdict['annotation_level']=x.get('severity')
         for y in x['flows']:
-
-            thisdict['affected-locations']=y['locations']#['locations']
+            thisdict['line']=y['locations'][0]['textRange']['startLine']#['locations']
             result.append(thisdict)
-
+      #  thisdict['line']=x['flows']
+       # for y in x['flows']:
+       #     thisdict['line']=y['locations']#['locations']
+      #  result.append(thisdict)
+     
 
 with open("sonarresults.json", "w") as outfile:
     json.dump(result, outfile, indent=4)
