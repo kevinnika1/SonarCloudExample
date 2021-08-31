@@ -21,28 +21,24 @@ jobs:
         uses: actions/checkout@master
 
       - name: Run Checkov action client
-        id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
           soft_fail: true
           output_format: cli
           
       - name: Run Checkov action json
-        id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
           soft_fail: true
           output_format: json
       
       - name: Run Checkov action github
-        id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
           soft_fail: true
           output_format: github_failed_only
       
       - name: Run Checkov action junit
-        id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
           soft_fail: true
