@@ -11,10 +11,10 @@ result= []
 for x in issuesJSON['issues']:
     if (x['project']== project):
         thisdict= {}
-        thisdict['file']=x['component'].replace(project+":", '/')
+        thisdict['path']=x['component'].replace(project+":", '')#thisdict['file']=x['component'].replace(project+":", '/')
         thisdict['title']=x.get('component')
         thisdict['message']=x.get('message')
-        thisdict['annotation_level']=x.get('severity')
+        thisdict['level']=x.get('severity')#thisdict['annotation_level']=x.get('severity')
         for y in x['flows']:
             thisdict['line'] = {'start': y['locations'][0]['textRange']['startLine'], 'end': y['locations'][0]['textRange']['endLine']}
         for z in x['flows']:
