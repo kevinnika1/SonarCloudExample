@@ -38,11 +38,6 @@ jobs:
           soft_fail: true
           output_format: github_failed_only
       
-      - name: Run Checkov action junit
-        uses: bridgecrewio/checkov-action@master
-        with:
-          soft_fail: true
-          output_format: junitxml
 
    SAST:
     runs-on: ubuntu-latest
