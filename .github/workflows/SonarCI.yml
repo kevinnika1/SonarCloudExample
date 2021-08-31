@@ -59,10 +59,10 @@ jobs:
         ls
         
     - name: upload sonar results to annotaions
-      uses: Attest/annotations-action@v1.0.3
+      uses: Attest/annotations-action@v0.1.0
       with:
-          secret: ${{ secrets.GITHUB_TOKEN }}
-          path: './sonarresults.json'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          input: './sonarresults.json'
           title: 'Sonar Issues'
           
           
