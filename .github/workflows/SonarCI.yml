@@ -86,17 +86,17 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          output: trivy-results.txt
+          output: trivy-results.json
 
       - name: check trivy results file
         run: |
-          cat trivy-results.txt
+          cat trivy-results.json
 
       - name: Upload trviy results
         uses: actions/upload-artifact@v2
         with:
           name: Conatiner VM results
-          path: trivy-results.txt
+          path: trivy-results.json
 
    PushtoECR:
       runs-on: ubuntu-latest
