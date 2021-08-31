@@ -14,11 +14,17 @@ try:
                 thisdict= {}
                 thisdict['path']=path
                 thisdict['message']=str("Installed version: "+v.get('InstalledVersion')+", Fixed Version: "+v.get('FixedVersion'))
-                thisdict['level']=v.get('Severity')
+                if (v['Severity']=="UNKNOWN" or v['Severity']=="MEDIUM" or v['Severity']=="LOW"):
+                    thisdict['annotation_level']="notice"
+                elif (v['Severity']=="HIGH"):
+                    thisdict['annotation_level']="warning"
+                elif (v['Severity']=="CRITICAL"):
+                    thisdict['annotation_level']="failure"
+                thisdict['line']=0
                 if ("Title" in v):
-                    thisdict['title']=str(v.get('VulnerabilityID')+", "+v.get('Title'))
+                    thisdict['title']=str(v.get('VulnerabilityID')+", "+v.get('Title')+", "+"Severity: "+v.get('Severity'))
                 else:
-                    thisdict['title']=v.get('VulnerabilityID')
+                    thisdict['title']=str(v.get('VulnerabilityID')+", Severity: "+v.get('Severity'))
                 result.append(thisdict)
 
     with open("trivyparsedresults.json", "w") as outfile:
