@@ -76,6 +76,16 @@ jobs:
       - name: Build an image from Dockerfile
         run: |
           docker build . --tag flask-demo-container:${{ github.sha }}
+          
+      - name: Run Trivy vulnerability scanner with table
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'flask-demo-container:${{ github.sha }}'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          output: trivy-resultstable.txt
         
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -83,19 +93,20 @@ jobs:
           image-ref: 'flask-demo-container:${{ github.sha }}'
           format: 'json'
           exit-code: '0'
-          ignore-unfixed: false
+          ignore-unfixed: true
           vuln-type: 'os,library'
           output: trivy-results.json
 
       - name: check trivy results file
         run: |
           cat trivy-results.json
-
+          cat trivy-resultstable.txt
+          
       - name: Upload trviy results
         uses: actions/upload-artifact@v2
         with:
           name: Conatiner VM results
-          path: trivy-results.json
+          path: trivy-resultstable.txt
       
       - name: Parse Trivy JSON output
         run: |
