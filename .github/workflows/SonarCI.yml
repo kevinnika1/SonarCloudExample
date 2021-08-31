@@ -61,9 +61,9 @@ jobs:
     - name: upload sonar results to annotaions
       uses: Attest/annotations-action@v1.0.3
       with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
-          title: 'Sonar Issues'
+          token: ${{ secrets.GITHUB_TOKEN }}
           input: './sonarresults.json'
+          title: 'Sonar Issues'
           
           
   
