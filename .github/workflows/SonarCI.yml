@@ -83,9 +83,8 @@ jobs:
           image-ref: 'flask-demo-container:${{ github.sha }}'
           format: 'json'
           exit-code: '0'
-          ignore-unfixed: true
+          ignore-unfixed: false
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
           output: trivy-results.json
 
       - name: check trivy results file
@@ -97,6 +96,18 @@ jobs:
         with:
           name: Conatiner VM results
           path: trivy-results.json
+      
+      - name: Parse Trivy JSON output
+        run: |
+          python trivyjson.py
+          ls
+          
+      - name: upload Trivy results to annotaions
+        uses: yuzutech/annotations-action@v0.3.0
+        with:
+            repo-token: "${{ secrets.GITHUB_TOKEN }}"
+            title: 'Trivy Results'
+            input: './trivyparsedresults.json'
 
    PushtoECR:
       runs-on: ubuntu-latest
