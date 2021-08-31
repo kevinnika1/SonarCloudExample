@@ -59,10 +59,9 @@ jobs:
         ls
         
     - name: upload sonar results to annotaions
-      uses: yuzutech/annotations-action@v0.3.0
+      uses: Attest/annotations-action@v1.0.3
       with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          ignore-unauthorized-error: 'true'
+          token: "${{ secrets.GITHUB_TOKEN }}"
           title: 'Sonar Issues'
           input: './sonarresults.json'
           
