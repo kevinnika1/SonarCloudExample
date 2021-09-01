@@ -1,6 +1,6 @@
 FROM python:3.8-alpine
 
-MAINTAINER Kevin Nika
+LABEL Kevin Nika
 
 COPY ./app/requirements.txt /app/requirements.txt
 

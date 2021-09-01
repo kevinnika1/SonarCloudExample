@@ -1,0 +1,14 @@
+{
+    "sonarlint.connectedMode.connections.sonarcloud": [
+      {
+        "organizationKey": "kevinnika1",
+        "token": "6dbb7f3008b9678cf94d3705cb66f7c3c26eb9d4"
+      }
+    ],
+    "sonarlint.output.showAnalyzerLogs": true,
+    "sonarlint.output.showVerboseLogs": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "sonarlint.connectedMode.project": {"projectKey": "kevinnika1_githubAStest"}
+  
+  }
