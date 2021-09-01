@@ -13,7 +13,7 @@ try:
             for v in data[0]['Vulnerabilities']:
                 thisdict= {}
                 thisdict['path']=path
-                thisdict['message']=str("Installed version: "+v.get('InstalledVersion')+", Fixed Version: "+v.get('FixedVersion'))
+                thisdict['message']=str("Package Name: "+v.get('PkgName')+", Installed version: "+v.get('InstalledVersion')+", Fixed Version: "+v.get('FixedVersion')+"  URL for more info: "+v.get('PrimaryURL'))
                 if (v['Severity']=="UNKNOWN" or v['Severity']=="MEDIUM" or v['Severity']=="LOW"):
                     thisdict['annotation_level']="notice"
                 elif (v['Severity']=="HIGH"):
