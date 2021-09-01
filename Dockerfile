@@ -1,4 +1,4 @@
-FROM python:3.4.6-alpine
+FROM python:3.12.0-alpine
 
 LABEL Kevin Nika
 
