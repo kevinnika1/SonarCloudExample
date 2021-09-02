@@ -12,7 +12,7 @@ for x in issuesJSON['issues']:
     if (x['project']== project):
         thisdict= {}
         thisdict['path']=x['component'].replace(project+":", '')
-        thisdict['title']=x.get('component')
+        thisdict['title']=str("SAST: "+x.get('component'))
         thisdict['message']=x.get('message')
         thisdict['annotation_level']="failure" #x.get('severity')#thisdict['annotation_level']=x.get('severity')
         for y in x['flows']:
