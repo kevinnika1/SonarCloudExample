@@ -208,7 +208,7 @@ jobs:
          pip install xmltodict
        
       - name: run DAST scan
-        run: python qualysdast-api.py --qualysuser ${{ secrets.qualysuser }} --qualyspass ${{ secrets.qualyspass }} --website "https://t5s-tst.nlv.yourmenu.cloud" --project "sonar example pipeline"
+        run: python qualysdast-api.py --qualysuser ${{ secrets.qualysuser }} --qualyspass ${{ secrets.qualyspass }} --website "https://t5s-tst.nlv.yourmenu.cloud" --project "sonarcloud example pipeline"
 
       - name: save the report outputted by DAST scan
         uses: actions/upload-artifact@v2
