@@ -116,7 +116,7 @@ def run(username,password,website,project):
     <ServiceRequest>
     <data>
     <WasScan>
-    <name>New WAS VULNERABILITY Scan launched from API</name>
+    <name>New WAS VULNERABILITY Scan launched from API!</name>
     <type>VULNERABILITY</type>
     <target>
     <webApp>
