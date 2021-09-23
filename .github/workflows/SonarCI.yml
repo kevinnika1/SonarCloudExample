@@ -198,22 +198,29 @@ jobs:
      runs-on: ubuntu-latest
      needs: [DeployToEKS]
      steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
-      - name: download everything i need
-        run: |
-         pip install urllib3
-         pip install requests
-         pip install xmltodict
-       
-      - name: run DAST scan
-        run: python qualysdast-api.py --qualysuser ${{ secrets.qualysuser }} --qualyspass ${{ secrets.qualyspass }} --website "https://t5s-tst.nlv.yourmenu.cloud" --project "sonarcloud example pipeline"
-
-      - name: save the report outputted by DAST scan
-        uses: actions/upload-artifact@v2
+      - name: DAST scan using action
+        uses: kevinnika1/QualysWAS-Actionn@v0.1
         with:
-          name: DAST results
-          path: ./reports/
+          qualysuser: ${{ secrets.qualysuser }}
+          qualyspass: ${{ secrets.qualyspass }}
+          website: 'https://t5s-tst.nlv.yourmenu.cloud'
+          project: 'sonarcloud example pipeline'
+     # - name: Checkout
+     #   uses: actions/checkout@v2
+     #   
+     # - name: download everything i need
+     #   run: |
+     #    pip install urllib3
+     #    pip install requests
+     #    pip install xmltodict
+     #  
+     # - name: run DAST scan
+     #   run: python qualysdast-api.py --qualysuser ${{ secrets.qualysuser }} --qualyspass ${{ secrets.qualyspass }} --website "https://t5s-tst.nlv.yourmenu.cloud" --project "sonarcloud example pipeline"#
+
+#      - name: save the report outputted by DAST scan
+ #       uses: actions/upload-artifact@v2
+  #      with:
+   #       name: DAST results
+    #      path: ./reports/
           
 
