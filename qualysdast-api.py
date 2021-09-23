@@ -1,4 +1,4 @@
-import sys, os, urllib3, argparse, pdb, time
+import sys, argparse, time
 import zipfile
 import requests
 import xmltodict
@@ -23,7 +23,7 @@ def run(username,password,website,project):
         <ServiceRequest>
         <data>
         <OptionProfile>
-        <name><![CDATA[YourMenu WAS Options]]></name>
+        <name><![CDATA[{project_placeholder} WAS Options]]></name>
         <maxCrawlRequests>8000</maxCrawlRequests>
         <smartScanSupport>true</smartScanSupport>
         <smartScanDepth>1</smartScanDepth>
@@ -32,20 +32,20 @@ def run(username,password,website,project):
         </OptionProfile>
         </data>
         </ServiceRequest>
-        """
+        """.format(project_placeholder=project)
 
         response = requests.post(url_option, auth=HTTPBasicAuth(username,password), data=data)
         dict_data = xmltodict.parse(response.content)
         option_id= dict_data['ServiceResponse']['data']['OptionProfile']['id']
         print(dict_data)
 
-        #create auth record and get its id to use for the scan and report
+        #create auth record and get its id to use for the scan and report this can vaary from project to project
         url= "https://qualysapi.qg2.apps.qualys.eu:443/qps/rest/3.0/create/was/webappauthrecord"
         data = """
         <ServiceRequest>
         <data>
         <WebAppAuthRecord>
-        <name><![CDATA[YourMenuAuth]]></name>
+        <name><![CDATA[{project_placeholder}Auth]]></name>
         <formRecord>
         <type>CUSTOM</type>
         <sslOnly>true</sslOnly>
@@ -69,7 +69,7 @@ def run(username,password,website,project):
         </WebAppAuthRecord>
         </data>
         </ServiceRequest>
-        """
+        """.format(project_placeholder=project)
 
         response = requests.post(url, auth=HTTPBasicAuth(username,password), data=data)
         dict_data = xmltodict.parse(response.content)
@@ -117,7 +117,7 @@ def run(username,password,website,project):
         <ServiceRequest>
         <data>
         <WasScan>
-        <name>WAS VULNERABILITY Scan launched from the API</name>
+        <name>{project_placeholder} WAS VULNERABILITY Scan launched from the API</name>
         <type>VULNERABILITY</type>
         <target>
         <webApp>
@@ -136,7 +136,7 @@ def run(username,password,website,project):
         </WasScan>
         </data>
         </ServiceRequest>
-        """.format(webapp_id_placeholder=web_app_id,auth_id_placeholder=auth_id,option_id_placeholder=option_id)
+        """.format(webapp_id_placeholder=web_app_id,auth_id_placeholder=auth_id,option_id_placeholder=option_id,project_placeholder=project)
 
         response = requests.post(url_scan, auth=HTTPBasicAuth(username, password), data=data)
         dict_data = xmltodict.parse(response.content)
@@ -160,8 +160,8 @@ def run(username,password,website,project):
         <ServiceRequest>
         <data>
         <Report>
-        <name><![CDATA[YourMenu WAS report]]></name>
-        <description><![CDATA[A simple scan report]]></description>
+        <name><![CDATA[{project_placeholder} WAS report]]></name>
+        <description><![CDATA[A simple scan report for {project_placeholder}]]></description>
         <format>HTML_ZIPPED</format>
         <type>WAS_SCAN_REPORT</type>
         <config>
@@ -217,7 +217,7 @@ def run(username,password,website,project):
         </Report>
         </data>
         </ServiceRequest>
-        """.format(scan_id_placeholder=scan_id)
+        """.format(scan_id_placeholder=scan_id,project_placeholder=project)
 
         response = requests.post(url_report, auth=HTTPBasicAuth(username, password), data=data)
         dict_data = xmltodict.parse(response.content)
