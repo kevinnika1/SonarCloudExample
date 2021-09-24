@@ -199,7 +199,7 @@ jobs:
      needs: [DeployToEKS]
      steps:
       - id: foo
-        uses: kevinnika1/QualysWAS-Action@v0.4
+        uses: kevinnika1/QualysWAS-Action2@v0.1
         with:
           qualysuser: ${{ secrets.qualysuser }}
           qualyspass: ${{ secrets.qualyspass }}
