@@ -199,7 +199,7 @@ jobs:
      needs: [DeployToEKS]
      steps:
       - name: DAST scan using action
-        uses: kevinnika1/QualysWAS-Action@v0.1
+        uses: kevinnika1/QualysWAS-Action@v0.2
         with:
           qualysuser: ${{ secrets.qualysuser }}
           qualyspass: ${{ secrets.qualyspass }}
