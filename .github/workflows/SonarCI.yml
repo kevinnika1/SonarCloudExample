@@ -198,7 +198,7 @@ jobs:
      runs-on: ubuntu-latest
      needs: [DeployToEKS]
      steps:
-      - name: DAST scan using action
+      - id: foo
         uses: kevinnika1/QualysWAS-Action@v0.3
         with:
           qualysuser: ${{ secrets.qualysuser }}
