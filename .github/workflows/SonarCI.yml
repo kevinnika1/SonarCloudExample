@@ -100,9 +100,10 @@ jobs:
           output: trivy-resultstable.txt
           
       - id: foo
-        uses: kevinnika1/Trivy-GitHubChecks-Action@v0.1
+        uses: kevinnika1/Trivy-GitHubChecks-Action@v0.2
         with:
           image-ref: 'flask-demo-container:${{ github.sha }}'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
    
 #      - name: Run Trivy vulnerability scanner
 #        uses: aquasecurity/trivy-action@master
