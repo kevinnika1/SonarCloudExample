@@ -98,39 +98,40 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           output: trivy-resultstable.txt
-        
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+          
+      - id: foo
+        uses: kevinnika1/Trivy-GitHubChecks-Action@v0.1
         with:
           image-ref: 'flask-demo-container:${{ github.sha }}'
-          format: 'json'
-          exit-code: '0'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          output: trivy-results.json
+   
+#      - name: Run Trivy vulnerability scanner
+#        uses: aquasecurity/trivy-action@master
+#        with:
+#          image-ref: 'flask-demo-container:${{ github.sha }}'
+#          format: 'json'
+#          exit-code: '0'
+#          ignore-unfixed: true
+#          vuln-type: 'os,library'
+#          output: trivy-results.json
 
-      - name: check trivy results file
-        run: |
-          cat trivy-results.json
-          cat trivy-resultstable.txt
           
-      - name: Upload trviy results
-        uses: actions/upload-artifact@v2
-        with:
-          name: Conatiner VM results
-          path: trivy-resultstable.txt
-      
-      - name: Parse Trivy JSON output
-        run: |
-          python trivyjson.py
-          ls
+#      - name: Upload trviy results
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: Conatiner VM results
+#          path: trivy-resultstable.txt
+#      
+#      - name: Parse Trivy JSON output
+#        run: |
+#          python trivyjson.py
+#          ls
           
-      - name: upload Trivy results to annotaions
-        uses: yuzutech/annotations-action@v0.3.0
-        with:
-            repo-token: "${{ secrets.GITHUB_TOKEN }}"
-            title: 'Trivy Results'
-            input: './trivyparsedresults.json'
+#      - name: upload Trivy results to annotaions
+#        uses: yuzutech/annotations-action@v0.3.0
+#        with:
+#            repo-token: "${{ secrets.GITHUB_TOKEN }}"
+#            title: 'Trivy Results'
+#            input: './trivyparsedresults.json'
 
    PushtoECR:
       runs-on: ubuntu-latest
@@ -199,12 +200,12 @@ jobs:
      needs: [DeployToEKS]
      steps:
       - id: foo
-        uses: kevinnika1/QualysWAS-Action2@v0.1
+        uses: kevinnika1/QualysWAS-Action@v1
         with:
           qualysuser: ${{ secrets.qualysuser }}
           qualyspass: ${{ secrets.qualyspass }}
           website: 'https://t5s-tst.nlv.yourmenu.cloud'
-          project: 'sonarcloud example pipeline'
+          project: 'sonarcloud-pipeline'
      # - name: Checkout
      #   uses: actions/checkout@v2
      #   
