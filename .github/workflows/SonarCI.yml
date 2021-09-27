@@ -65,7 +65,7 @@ jobs:
    #   env:
    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
    
-    - name: Github Check integration
+    - name: Github Checks int
       uses: kevinnika1/Sonarcloud-GithubChecks-action@v2
       with:
         org: 'kevinnika1'
