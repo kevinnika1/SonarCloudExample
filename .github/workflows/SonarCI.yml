@@ -66,12 +66,6 @@ jobs:
    #   env:
    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
    
-    - name: test
-      uses: kevinnika1/Sonarcloud-GithubChecks-action@v2
-      with:
-        org: 'kevinnika1'
-        project-key: 'kevinnika1_SonarCloudExample'
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
        
    # - name: Get Sonar Issues
    #   run: |
@@ -85,7 +79,16 @@ jobs:
   #        title: 'Sonar Issues'
   #        input: './sonarresults.json'
           
-  
+   SASTCheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        uses: kevinnika1/Sonarcloud-GithubChecks-action@v2
+        with:
+          org: 'kevinnika1'
+          project-key: 'kevinnika1_SonarCloudExample'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+
    ContainerVM:
     runs-on: ubuntu-latest
     needs: [SCA,SAST]
