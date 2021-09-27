@@ -64,18 +64,25 @@ jobs:
    #   timeout-minutes: 5
    #   env:
    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-       
-    - name: Get Sonar Issues
-      run: |
-        python sonar-apis.py
-        ls
-        
-    - name: upload sonar results to annotaions
-      uses: yuzutech/annotations-action@v0.3.0
+   
+    - name: Github Check integration
+      uses: kevinnika1/Sonarcloud-GithubChecks-action@v2
       with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          title: 'Sonar Issues'
-          input: './sonarresults.json'
+        org: 'kevinnika1'
+        project-key: 'kevinnika1_SonarCloudExample'
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+       
+   # - name: Get Sonar Issues
+   #   run: |
+   #     python sonar-apis.py
+   #     ls
+        
+  #  - name: upload sonar results to annotaions
+  #    uses: yuzutech/annotations-action@v0.3.0
+  #    with:
+  #        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+  #        title: 'Sonar Issues'
+  #        input: './sonarresults.json'
           
   
    ContainerVM:
