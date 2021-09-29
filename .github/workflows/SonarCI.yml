@@ -178,27 +178,42 @@ jobs:
           echo "Pushing image to ECR..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
-  # CheckECR:
-  #    runs-on: ubuntu-18.04
-  #    needs: [PushtoECR]
-  #    steps:
-  #      - name: Checkout code
-  #        uses: actions/checkout@v2
-  #        
-  #      - name: Run Trivy vulnerability scanner
-  #        uses: aquasecurity/trivy-action@master
-  #        with:
-  #          image-ref: 'aws_account_id.dkr.ecr.region.amazonaws.com/imageName:${{ github.sha }}'
-  #          format: 'json'
-  #          output: 'trivyecr-results.txt'
-  #        env:
-  #          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #          AWS_DEFAULT_REGION: eu-west-1
-
-  #      - name: Check ecr result file
-  #        run: cat trivyecr-results.txt
+          
+      - name: run trivy scan on ecr
+        uses: aquasecurity/trivy-action@master
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
+          IMAGE_TAG: 1.0
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-west-1       
+        with:
+          image-ref:  '$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+           
+           
+#   CheckECR:
+#      runs-on: ubuntu-18.04
+#      needs: [PushtoECR]
+#      steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#        
+#      - name: Run Trivy vulnerability scanner
+#        uses: aquasecurity/trivy-action@master
+#        with:
+#          image-ref: 'aws_account_id.dkr.ecr.region.amazonaws.com/imageName:${{ github.sha }}'
+     #     format: 'template'
+#          template: '@/contrib/sarif.tpl'
+ #         output: 'trivy-results.sarif'
+#        env:
+  #        AWS_ACCESS_KEY_ID: key_id
+   #       AWS_SECRET_ACCESS_KEY: access_key
+    #      AWS_DEFAULT_REGION: us-west-2
 
    DeployToEKS:
       runs-on: ubuntu-latest
