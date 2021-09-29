@@ -80,6 +80,7 @@ jobs:
   #        input: './sonarresults.json'
           
    SASTCheck:
+    needs: [SAST]
     runs-on: ubuntu-latest
     steps:
       - name: test
@@ -91,7 +92,7 @@ jobs:
 
    ContainerVM:
     runs-on: ubuntu-latest
-    needs: [SCA,SAST]
+    needs: [SCA,SAST,SASTCheck]
     steps: 
       - name:  Checkout repo
         uses: actions/checkout@master
