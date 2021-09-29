@@ -182,14 +182,11 @@ jobs:
       - name: run trivy scan on ecr
         uses: aquasecurity/trivy-action@master
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
-          IMAGE_TAG: 1.0
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-west-1       
         with:
-          image-ref:  '$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG'
+          image-ref:  '999603135242.dkr.ecr.eu-west-1.amazonaws.com/sonar-example:1'
           format: 'table'
           exit-code: '0'
           ignore-unfixed: true
