@@ -237,7 +237,7 @@ jobs:
    # this part need to pass it website link whether that is static or not depends on application but in this case will test a random app. 
    DAST: 
      runs-on: ubuntu-latest
-     needs: [DeployToEKS]
+     needs: [DeployToECS]
      steps:
       - id: foo
         uses: kevinnika1/QualysWAS-Action@v1
